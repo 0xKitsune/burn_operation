@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="assets/burn_operation.jpg" alt="Logo" width="600" height="800">
+    <img src="assets/burn_operation.jpg" alt="Logo" width="394" height="360">
   </a>
   <h1 align="center">burn_operation</h1>
   <p align="center">
