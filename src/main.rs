@@ -3,8 +3,6 @@ extern crate glob;
 use jwalk::WalkDir;
 
 
-
-
 fn main() -> std::io::Result<()> {
     burn_operation()?;
     Ok(())
