@@ -28,7 +28,9 @@ fn burn_operation() -> std::io::Result<()> {
 
 
 fn burn_file(path: &str) -> std::io::Result<()> {
-    fs::remove_file(path)?;
+    //find where the file is and zero it
+    // fs::remove_file(path)?;
+    
     Ok(())
 }
 

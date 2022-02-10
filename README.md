@@ -19,3 +19,7 @@ A Rust based CLI that completely wipes a computer securely, at the speed of ligh
 Instructions to install, add to path and execute. Ideally is a command in the terminal at any time that is just `burn_operation`.
 
 
+
+## Notes
+
+Also add `dead_mans_switch`, it will prompt you to enter a password (which will hash a phrase, the password is not stored anywhere, just the hashed phrase), as well as a frequency to check in and how long it will wait for a response. Then it will prompt you for your password at that time interval, wait the response time, and if there is no response, it will initiate `burn_operation`.
