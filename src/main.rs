@@ -1,6 +1,5 @@
 use std::fs;
 extern crate glob;
-use std::time::{Instant};
 use jwalk::WalkDir;
 
 
