@@ -1,28 +1,24 @@
 use std::fs;
 extern crate glob;
-use glob::glob;
 use std::time::{Instant};
-use rayon::prelude::*;
+use jwalk::WalkDir;
 
 
-fn main() {
-        let now = Instant::now();
 
-       println!("Time elapsed: {} seconds", now.elapsed().as_secs());
 
-    }
-
+fn main() -> std::io::Result<()> {
+    burn_operation()?;
+    Ok(())
+}
 
     
-fn burn_operation(){
+fn burn_operation() -> std::io::Result<()> {
 
-    let all_files = glob("/**").expect("Failed to read glob pattern");
-
-    let file_failures: Vec<_> = all_files.par_iter().map(|path| {
-
-    });
-    
-
+    for file_path in WalkDir::new("/") {
+        println!("{}", file_path.unwrap().path().display());
+        // burn_file(file_path.unwrap().path().display().to_string().as_str())?;
+      }
+   Ok(())
 }
 
 
