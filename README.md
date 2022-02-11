@@ -18,14 +18,14 @@ A Rust based CLI that completely wipes a computer securely, at the speed of ligh
 
 Installing burn_operation takes two simple steps.
 
-First, clone the burn_operation git repo.
+First, clone the burn_operation repo.
 
 ```
 git clone https://github.com/0xKitsune/burn_operation.git && cd burn_operation
 
 ```
 
-Make sure you have Rust installed. If you don't, run this command to install it: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`.
+Make sure you have Rust installed. If not, install it with: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`.
 
 Once you have rust installed, run the following command.
 
