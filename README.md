@@ -21,7 +21,7 @@ Installing burn_operation takes two simple steps.
 First, clone the burn_operation git repo.
 
 ```
-git clone https://github.com/0xKitsune/Burn_Operation.git && cd burn_operation
+git clone https://github.com/0xKitsune/burn_operation.git && cd burn_operation
 
 ```
 
