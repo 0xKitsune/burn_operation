@@ -25,7 +25,9 @@ git clone https://github.com/0xKitsune/burn_operation.git && cd burn_operation
 
 ```
 
-Next, run the following command.
+Make sure you have Rust installed. If you don't, run this command to install it: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`.
+
+Once you have rust installed, run the following command.
 
 ```
 cargo install --path .
