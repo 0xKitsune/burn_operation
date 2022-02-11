@@ -1,12 +1,15 @@
 use std::fs;
+use std::fs::metadata;
 extern crate glob;
 use jwalk::WalkDir;
 use std::time::{Instant};
-
+use rand::{thread_rng, Rng};
 
 fn main() -> std::io::Result<()> {
-    burn_operation()?;
-    Ok(())
+    // burn_operation()?;     
+     Ok(())
+
+
 }
 
     
@@ -28,7 +31,15 @@ fn burn_operation() -> std::io::Result<()> {
 
 
 fn burn_file(path: &str) -> std::io::Result<()> {
-    //find where the file is and zero it
+    //TODO: Logic to wipe file with rand bye write logic
+    let file_size = metadata(path)?.len();
+    //create byte array with file size
+    let mut arr = [0i8; file_size];
+    //write rand bytes to the array
+    thread_rng().fill(&mut arr[..]);
+    //write the rand byte array to the file
+    fs::write("./test.txt", arr);
+    //delete the file
     // fs::remove_file(path)?;
     
     Ok(())
