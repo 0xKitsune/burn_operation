@@ -16,10 +16,34 @@ A Rust based CLI that completely wipes a computer securely, at the speed of ligh
 
 ## How to use burn_operation
 
-Instructions to install, add to path and execute. Ideally is a command in the terminal at any time that is just `burn_operation`. `-n=number_of_passes` flag to overwrite `n` times.
+Installing burn_operation takes two simple steps.
+
+First, clone the burn_operation git repo.
+
+```
+git clone https://github.com/0xKitsune/Burn_Operation.git
+```
+
+Next, run the following command.
+
+```
+cargo install --path .
+```
+
+Now you are all set up and can run burn_operation from anywhere in your terminal. **IMPORTANT:** There is no safety on this by design. Once you execute the program, there is no going back. Do not use this command unless you are certain that you want to wipe your computer beyond recovery.
+
+With all of that out of the way, to run burn_operation to completely wipe your computer, run the following command from anywhere in your terminal.
+
+```
+burn_operation
+```
 
 
+## Upcoming features
 
-## Notes
+### burn_operation -n
+The `-n` flag indicates the number of passes that the programw will overwrite the file with random bytes. For example if a user inputs `burn_operation -n=5`, the program will overwrite each file with random bytes 5 times.
 
-Also add `dead_mans_switch`, it will prompt you to enter a password (which will hash a phrase, the password is not stored anywhere, just the hashed phrase), as well as a frequency to check in and how long it will wait for a response. Then it will prompt you for your password at that time interval, wait the response time, and if there is no response, it will initiate `burn_operation`.
+
+### Deadman's Switch
+`dead_mans_switch` will wipe a computer after "x" time has passed without the user checking in. When burn_operation is run with this flag, you will be prompted you to enter a keyphrase (basically a password) of your choosing. This will be used to generate a hash. The hash will act as a security check, with burn_operation prompting you to enter your keyphrase to verify that you are the one who initiated the dead mans switch. You can also set how long the program should wait for your response after prompting you. After this time has elapsed, the program will automatically call `burn_operation`, wiping everything on the computer.
