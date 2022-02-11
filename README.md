@@ -24,9 +24,10 @@ First, clone the burn_operation git repo.
 git clone https://github.com/0xKitsune/Burn_Operation.git
 ```
 
-Next, run the following command.
+Next, run the following commands.
 
 ```
+cd burn_operation
 cargo install --path .
 ```
 
