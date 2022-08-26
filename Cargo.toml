@@ -9,7 +9,7 @@ repository = "https://github.com/0xKitsune/burn_operation"
 documentation = "https://docs.rs/burn_operation/"
 readme = "README.md"
 keywords = ["secure", "wipe", "zero", "reset"]
-categories = ["security"]
+categories = ["filesystem"]
 
 
 [dependencies]
