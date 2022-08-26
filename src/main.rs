@@ -1,59 +1,48 @@
-use std::{fs, os::unix::prelude::FileExt};
-use std::fs::metadata;
-extern crate glob;
-use jwalk::WalkDir;
-use rand::Rng;
-use std::io::Write;
+mod burn_operation;
+use std::path::PathBuf;
+
+use clap::Parser;
+
+#[derive(Parser)]
+#[clap(
+    name = "Burn Operation",
+    about = "Securely wipe a computer at the speed of light."
+)]
+struct Args {
+    #[clap(
+        short,
+        long,
+        help = "Path of file or directory to wipe. If no argument is included, the default path is `/` which will wipe the entire computer.",
+        default_value = "/"
+    )]
+    pub path: PathBuf,
+
+    #[clap(
+        short,
+        long,
+        help = "Number of iterations when burning each file.",
+        default_value = "25"
+    )]
+    pub n: usize,
+
+    #[clap(
+        short,
+        long,
+        parse(from_flag),
+        help = "Initializes a dead man's switch from the `dead_mans_switch.toml` file."
+    )]
+    pub dead_mans_switch: bool,
+}
 
 fn main() -> std::io::Result<()> {
-    //burn everything from starting from root
-    burn_operation("/")?;
-    Ok(())
-}
+    let args = Args::parse();
 
-    
-fn burn_operation(root: &str) -> std::io::Result<()> {
-    //for every file on the computer, burn_file
-    for file_path in WalkDir::new(&root) {
-      let file_path = file_path.unwrap().path().display().to_string();
-      let md = metadata(&file_path).unwrap();
-      
-      //if the file_path is a file
-      if md.is_file(){
-        println!("Burning {}", &file_path);
-        //burn the file
-        burn_file(file_path.as_str())?;
-        }
-      }
-
-      //delete the directories that are in root
-      fs::remove_dir_all(&root)?;
-      
-
-   Ok(())
-}
-
-
-fn burn_file(path: &str) -> std::io::Result<()> {
-    //get the file size
-    let file_size = metadata(path)?.len();
-    //create a random number generator
-    let mut rng = rand::thread_rng();
-    //open the file and give write permissions
-    let mut f = std::fs::OpenOptions::new().write(true).open(path)?;
-    //for each byte in the file, overwrite it with a random byte
-    for i in 0..file_size { 
-      let rand_byte = rng.gen::<u8>();
-      f.write_at(&[rand_byte], i)?;
-      
+    if args.dead_mans_switch {
+        //read in the dead man's switch toml file
+    } else {
+        //burn everything from starting from root
+        burn_operation::burn::burn_system(args.path, &args.n)?;
     }
-    //ensure that every byte could be overwritten, if not return an error
-    f.flush()?;
- 
-    //delete the file
-    fs::remove_file(path)?;
-    
+
     Ok(())
 }
-
-

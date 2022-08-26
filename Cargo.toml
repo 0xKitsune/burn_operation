@@ -6,7 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-glob = "0.3.0"
-rayon = "1.5.1"
+clap = {version = "3.2.17", features = ["derive"]}
 jwalk = "0.1.0"
 rand = "0.5.0"
