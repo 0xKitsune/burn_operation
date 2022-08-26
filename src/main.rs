@@ -12,7 +12,7 @@ struct Args {
     #[clap(
         short,
         long,
-        help = "Path of file or directory to wipe. If no argument is included, the default path is `/` which will wipe the entire computer.",
+        help = "Path to file or directory to wipe. If no argument is included, the default path is `/` which will wipe the entire computer.",
         default_value = "/"
     )]
     pub path: PathBuf,
@@ -20,7 +20,7 @@ struct Args {
     #[clap(
         short,
         long,
-        help = "Number of iterations when burning each file.",
+        help = "Number of iterations when wiping each file.",
         default_value = "25"
     )]
     pub n: usize,
@@ -29,7 +29,7 @@ struct Args {
         short,
         long,
         parse(from_flag),
-        help = "Initializes a dead man's switch from the `dead_mans_switch.toml` file."
+        help = "Initializes a dead man's switch from a `dead_mans_switch.toml` file."
     )]
     pub dead_mans_switch: bool,
 }
