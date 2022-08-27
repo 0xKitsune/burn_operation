@@ -12,9 +12,6 @@ pub fn burn_system(root: PathBuf, n_iterations: &usize) -> std::io::Result<()> {
                 .unwrap_or("File does not exist at path provided."),
             n_iterations,
         )?;
-
-        //delete the file
-        fs::remove_file(root)?;
     } else {
         //for every file on the computer, burn_file
         for file_path in WalkDir::new(&root) {

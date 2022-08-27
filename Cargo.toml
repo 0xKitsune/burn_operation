@@ -1,6 +1,6 @@
 [package]
 name = "burn_operation"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["0xKitsune",]
 description = "A simple CLI tool to securely wipe a computer, at the speed of light."
@@ -14,5 +14,6 @@ categories = ["filesystem"]
 
 [dependencies]
 clap = {version = "3.2.17", features = ["derive"]}
+home = "0.5.3"
 jwalk = "0.1.0"
 rand = "0.5.0"
