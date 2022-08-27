@@ -14,38 +14,60 @@
 
 A Rust based CLI that completely wipes a computer securely, at the speed of light. Nice and handy when you need to initiate "Burn Operation". This program overwrites every file on your computer with random bytes, then deletes the file, effectively wiping the hard drive storage and making all of the data unrecoverable. Using `jwalk`, which enables parallelism through `rayon`, Rust is able to walk through a computer's directory tree, overwrite and delete files at very high speeds.  
 
-## How to use burn_operation
 
-Installing burn_operation takes two simple steps.
-
-First, clone the burn_operation repo.
+## Installing
+Make sure you have Rust installed. If not, install it with: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`. After installing Rust, enter the following command into your terminal to install Burn Operation:
 
 ```
-git clone https://github.com/0xKitsune/burn_operation.git && cd burn_operation
+cargo install burn_operation
+```
+
+## Permissions
+By default, `burn_operation` wipes your entire computer which requires root access. You can either run the program with `sudo` or give access permissions to the burn_operation binary. 
+
+Giving permissions allows for quick and easy usage of the program without the need to input a password at runtime. This can be useful if you need to wipe many computers on a network with one command or if your usecase requires that `burn_operation` is on a hair trigger. To give permissions to the binary, enter the following commands in your terminal below:
+
+### Linux
+
+```
+chmod u+x $HOME/.cargo/bin/burn_operation
+```
+
+### Mac
+
+```
+chmod u+x $HOME/.cargo/bin/burn_operation
+```
+
+### Windows
+
+
+## Usage
+**IMPORTANT:** There is no safety on this by design. Once you execute the program, there is no going back. Do not use this command unless you are certain that you want to wipe your computer beyond recovery.
 
 ```
 
-Make sure you have Rust installed. If not, install it with: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`.
+USAGE:
+    burn_operation [OPTIONS]
 
-Once you have rust installed, run the following command.
+OPTIONS:
+    -d, --dead-mans-switch    Initializes a dead man's switch from a `dead_mans_switch.toml` file.
 
+    -h, --help                Print help information
+
+    -n, --n <N>               Number of iterations when wiping each file. [default: 25]
+
+    -p, --path <PATH>         Path to file or directory to wipe. If no argument is provided, the
+                              entire computer will be wiped. [default: /]
 ```
-cargo install --path .
-```
 
-Now you are all set up and can run burn_operation from anywhere in your terminal. **IMPORTANT:** There is no safety on this by design. Once you execute the program, there is no going back. Do not use this command unless you are certain that you want to wipe your computer beyond recovery.
-
-With all of that out of the way, to run burn_operation to completely wipe your computer, run the following command from anywhere in your terminal.
-
-```
-burn_operation
-```
+### `burn_operation -n`
+The `-n` flag indicates the number of iterations that the program will overwrite a file with random bytes. For example if a user inputs `burn_operation -n=25`, the program will overwrite each file with random bytes 25 times.
 
 
 ## Upcoming features
 
-### burn_operation -n
-The `-n` flag indicates the number of passes that the programw will overwrite the file with random bytes. For example if a user inputs `burn_operation -n=5`, the program will overwrite each file with random bytes 5 times.
+
 
 
 ### Deadman's Switch
