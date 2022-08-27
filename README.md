@@ -29,15 +29,10 @@ Giving permissions allows for quick and easy usage of the program without the ne
 
 ### Linux
 
-```
-chmod u+x $HOME/.cargo/bin/burn_operation
-```
 
 ### Mac
 
-```
-chmod u+x $HOME/.cargo/bin/burn_operation
-```
+
 
 ### Windows
 
@@ -61,14 +56,11 @@ OPTIONS:
                               entire computer will be wiped. [default: /]
 ```
 
-### `burn_operation -n`
+### `-n`
 The `-n` flag indicates the number of iterations that the program will overwrite a file with random bytes. For example if a user inputs `burn_operation -n=25`, the program will overwrite each file with random bytes 25 times.
 
 
 ## Upcoming features
-
-
-
 
 ### Deadman's Switch
 `dead_mans_switch` will wipe a computer after "x" time has passed without the user checking in. When burn_operation is run with this flag, you will be prompted you to enter a keyphrase (basically a password) of your choosing. This will be used to generate a hash. The hash will act as a security check, with burn_operation prompting you to enter your keyphrase to verify that you are the one who initiated the dead mans switch. You can also set how long the program should wait for your response after prompting you. After this time has elapsed, the program will automatically call `burn_operation`, wiping everything on the computer.
