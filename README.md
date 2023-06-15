@@ -12,6 +12,8 @@
 
 ## Overview
 
+**DISCLAIMER**: This program is not fully tested and should not be assumed to work correctly until proper tests and validation are in place.
+
 A Rust based CLI that completely wipes a computer securely, at the speed of light. Nice and handy when you need to initiate "Burn Operation". This program overwrites every file on your computer with random bytes, then deletes the file, effectively wiping the hard drive storage and making all of the data unrecoverable. Using `jwalk`, which enables parallelism through `rayon`, Rust is able to walk through a computer's directory tree, overwrite and delete files at very high speeds.  
 
 
@@ -23,18 +25,42 @@ cargo install burn_operation
 ```
 
 ## Permissions
-By default, `burn_operation` wipes your entire computer which requires root access. You can either run the program with `sudo` or give access permissions to the burn_operation binary. 
+By default, `burn_operation` wipes your entire computer which requires root access. You can either run the program with `sudo` or give access permissions to the burn_operation binary.
 
-Giving permissions allows for quick and easy usage of the program without the need to input a password at runtime. This can be useful if you need to wipe many computers on a network with one command or if your usecase requires that `burn_operation` is on a hair trigger. To give permissions to the binary, enter the following commands in your terminal below:
+Giving permissions allows for quick and easy usage of the program without the need to input a password at runtime, however this can be a major security risk, so this is at your own risk. This can be useful if you need to wipe many computers on a network with one command or if your usecase requires that `burn_operation` is on a hair trigger. To give permissions to the binary, enter the following commands in your terminal below:
 
 ### Linux
+`burn_operation`
+```
+BURN_OPERATION_BINARY=$(which burn_operation)
+sudo chown root:root $BURN_OPERATION_BINARY
+sudo chmod u+s $BURN_OPERATION_BINARY
+```
 
+`dead_mans_switch`
+```
+DEAD_MANS_SWITCH_BINARY=$(which dead_mans_switch)
+sudo chown root:root $DEAD_MANS_SWITCH_BINARY
+sudo chmod u+s $DEAD_MANS_SWITCH_BINARY
+```
 
 ### Mac
+`burn_operation`
+```
+BURN_OPERATION_BINARY=$(which burn_operation)
+sudo chown root:wheel $BURN_OPERATION_BINARY
+sudo chmod u+s $BURN_OPERATION_BINARY
+```
 
-
+`dead_mans_switch`
+```
+DEAD_MANS_SWITCH_BINARY=$(which dead_mans_switch)
+sudo chown root:wheel $DEAD_MANS_SWITCH_BINARY
+sudo chmod u+s $DEAD_MANS_SWITCH_BINARY
+```
 
 ### Windows
+
 
 
 ## Usage

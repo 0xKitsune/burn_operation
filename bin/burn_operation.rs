@@ -1,4 +1,3 @@
-mod burn_operation;
 use clap::Parser;
 use std::env;
 use std::io::Error;
@@ -11,7 +10,6 @@ use std::process::Command;
     about = "Securely wipe a computer at the speed of light."
 )]
 struct Args {
-
     #[clap(
         short,
         long,
@@ -40,8 +38,7 @@ struct Args {
 fn main() -> std::io::Result<()> {
     let args = Args::parse();
 
-
- if args.dead_mans_switch {
+    if args.dead_mans_switch {
         //read in the dead man's switch toml file
     } else {
         //burn everything from starting from root
@@ -50,4 +47,3 @@ fn main() -> std::io::Result<()> {
 
     Ok(())
 }
-

@@ -17,3 +17,8 @@ clap = {version = "3.2.17", features = ["derive"]}
 home = "0.5.3"
 jwalk = "0.1.0"
 rand = "0.5.0"
+
+
+[[bin]]
+name = "burn_operation"
+path = "bin/burn_operation.rs"

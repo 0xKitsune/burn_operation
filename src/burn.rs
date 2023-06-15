@@ -57,3 +57,32 @@ fn burn_file(path: &str, n_iterations: &usize) -> std::io::Result<()> {
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{burn_file, burn_system};
+    use rand::Rng;
+    use std::fs::{create_dir_all, File};
+    use std::io::Write;
+    use std::path::PathBuf;
+
+    #[test]
+    fn test_burn_system() {
+        let dir_path = PathBuf::from("./temp_test_dir");
+        create_dir_all(&dir_path).expect("could not create temp test dir");
+
+        // Create some files with random data
+        for i in 0..10 {
+            let file_path = dir_path.join(format!("file_{}.txt", i));
+            let mut file = File::create(file_path).expect("could not create new file");
+
+            let random_data: Vec<u8> = (0..1024).map(|_| rand::random::<u8>()).collect();
+            file.write_all(&random_data)
+                .expect("could not write new file");
+        }
+
+        let n_iterations = 25;
+        burn_system(PathBuf::from(dir_path.clone()), &n_iterations)
+            .expect("could not burn temp test dir");
+    }
+}
